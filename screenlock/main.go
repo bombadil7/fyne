@@ -62,6 +62,10 @@ func main() {
 	message := container.New(layout.NewHBoxLayout(), layout.NewSpacer(),
 		messageText, layout.NewSpacer())
 
-	w.SetContent(container.New(layout.NewVBoxLayout(), warning, widget.NewSeparator(), message))
+	image := canvas.NewImageFromFile("Radioactive.svg.png")
+	image.FillMode = canvas.ImageFillOriginal
+
+	w.SetContent(container.New(layout.NewVBoxLayout(),
+		warning, widget.NewSeparator(), message, widget.NewSeparator(), image))
 	w.ShowAndRun()
 }
