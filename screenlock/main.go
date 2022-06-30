@@ -62,10 +62,26 @@ func main() {
 	message := container.New(layout.NewHBoxLayout(), layout.NewSpacer(),
 		messageText, layout.NewSpacer())
 
-	image := canvas.NewImageFromFile("Radioactive.svg.png")
-	image.FillMode = canvas.ImageFillOriginal
+	sign := makeSign()
 
 	w.SetContent(container.New(layout.NewVBoxLayout(),
-		warning, widget.NewSeparator(), message, widget.NewSeparator(), image))
+		warning, widget.NewSeparator(), message, widget.NewSeparator(), sign))
 	w.ShowAndRun()
+}
+
+func makeSign() fyne.CanvasObject {
+	bg := canvas.NewCircle(color.NRGBA{255, 0, 0, 255})
+	bg.StrokeColor = color.White
+	bg.StrokeWidth = 12
+
+	bar := canvas.NewRectangle(color.White)
+
+	c := container.NewWithoutLayout(bg, bar)
+
+	bg.Resize(fyne.NewSize(900, 900))
+	bg.Move(fyne.NewPos(50, 50))
+
+	bar.Resize(fyne.NewSize(760, 160))
+	bar.Move(fyne.NewPos(120, 420))
+	return c
 }
